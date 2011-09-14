@@ -1,0 +1,35 @@
+<dl class="portlet portletSavedSearches"
+    i18n:domain="upfrontsystems.portlets.savedsearches"
+    tal:define="savedsearches view/getSavedSearches;">
+    
+    <dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        Saved searches
+        <span class="portletTopRight"></span>
+    </dt>
+    <tal:savedsearches repeat="key python:savedsearches.keys()">
+    <dd class="portletItem">
+        <span tal:content="key">Title</span>
+        <ul class="navTree">
+            <li tal:repeat="search python:savedsearches.get(key, [])">
+            <a href="#" tal:attributes="href python:search.getObject().absolute_url()">
+                <span tal:replace="search/Title">Search title</span>
+            </a>
+            </li>
+        </ul>
+    </dd>
+    </tal:savedsearches>
+    
+    <tal:no_savedsearches condition="python:len(savedsearches.keys()) == 0">
+    <dd class="portletItem">
+        No saved searches found.
+    </dd>
+    </tal:no_savedsearches>
+
+    <!--dd class="portletFooter">
+        <span class="portletBottomLeft"></span>
+        Footer
+        <span class="portletBottomRight"></span>
+    </dd-->
+
+</dl>

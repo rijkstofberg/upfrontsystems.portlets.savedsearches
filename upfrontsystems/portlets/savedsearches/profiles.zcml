@@ -1,0 +1,22 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="upfrontsystems.portlets.savedsearches">
+
+  <genericsetup:registerProfile
+      name="default"
+      title="Saved Searches"
+      directory="profiles/default"
+      description='Extension profile for the "Saved Searches" Plone theme.'
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:importStep
+      name="upfrontsystems.portlets.savedsearches.various"
+      title="Saved Searches: miscellaneous import steps"
+      description="Various import steps that are not handled by GS import/export handlers."
+      handler="upfrontsystems.portlets.savedsearches.setuphandlers.setupVarious">
+    <depends name="skins"/>
+  </genericsetup:importStep>
+
+</configure>

@@ -1,0 +1,46 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="upfrontsystems.portlets.savedsearches">
+
+  <five:registerPackage package="." initialize=".initialize" />
+  <include package=".browser" />
+  <include file="skins.zcml" />
+  <include file="profiles.zcml" />
+  <i18n:registerTranslations directory="locales" />
+
+    <genericsetup:registerProfile
+       name="default"
+       title="Saved Searches"
+       directory="profiles/default"
+       description="Saved Searches"
+       provides="Products.GenericSetup.interfaces.EXTENSION"
+       />
+
+     <!-- Register the portlet -->
+
+     <!-- If the portlet has no configurable parameters, you can remove
+          the EditForm declaration in savedsearches.py and delete
+          the 'editview' attribute from this statement.
+       -->
+
+     <plone:portlet
+         name="upfrontsystems.portlets.savedsearches.SavedSearches"
+         interface=".savedsearches.ISavedSearches"
+         assignment=".savedsearches.Assignment"
+         view_permission="zope2.View"
+         edit_permission="cmf.ManagePortal"
+         renderer=".savedsearches.Renderer"
+         addview=".savedsearches.AddForm"
+         editview=".savedsearches.EditForm"
+         />
+
+    <class class="Products.ATContentTypes.content.topic.ATTopic">
+        <implements interface=".interfaces.ISavedSearch" />
+    </class>
+
+</configure>

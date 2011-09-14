@@ -1,0 +1,9 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+  
+  <!-- event subscribers -->
+  <!--subscriber for="object interface
+                   event"
+    handler=".eventhandlers.[method name]"
+  /-->
+
+</configure>
