@@ -83,8 +83,12 @@ class SaveSearch(BrowserView):
             # now we add the required criteria
             self.addCriteria(currentsearch)
             # get on over to our new topic/ saved search
-            self.request.response.redirect(currentsearch.absolute_url())
-            return
+
+            msg = 'Search saved.'
+            putil = getToolByName(self.context, 'plone_utils')
+            putil.addPortalMessage(msg, 'info')
+            url = currentsearch.absolute_url()
+            return self.request.response.redirect(url)
         else:
             # At this point there is nothing we can do, so we return.
             # TODO: We should log some portal error here.
